@@ -1,0 +1,8 @@
+﻿{
+  "compilerOptions": {
+    "target": "ES2021",
+    "module": "Node16",
+    "outDir": "js"
+  },
+  "include": ["ts"]
+}

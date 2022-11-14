@@ -1,0 +1,27 @@
+{
+  "name": "webify-bim",
+  "version": "0.1.0",
+  "description": "",
+  "type": "module",
+  "main": "js/app.js",
+  "scripts": {
+    "postinstall": "dotnet restore",
+    "build:cs": "dotnet build",
+    "build:node": "tsc",
+    "start": "npm run build:node && node -r dotenv/config . -f -n Langeoog -d \"Pumpanlage auf Langeoog\" WW-TGA.ifc WW-ELT.ifc"
+  },
+  "dependencies": {
+    "edge-js": "^18.4.2",
+    "log4js": "^6.7.0",
+    "pg-promise": "^10.12.1",
+    "txml": "^5.1.1",
+    "yargs": "^17.6.2"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.9",
+    "caxa": "^3.0.1",
+    "dotenv": "^16.0.3",
+    "pretty-ts-imports": "^1.1.0",
+    "typescript": "^4.8.4"
+  }
+}
