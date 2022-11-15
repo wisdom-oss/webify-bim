@@ -1,6 +1,8 @@
 ﻿# IDE
 .idea/
 
+dist/
+
 obj/
 bin/
 node_modules/
