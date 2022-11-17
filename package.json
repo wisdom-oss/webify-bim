@@ -14,7 +14,6 @@
   },
   "dependencies": {
     "dotenv": "^16.0.3",
-    "edge-js": "^18.4.2",
     "log4js": "^6.7.0",
     "pg-promise": "^10.12.1",
     "txml": "^5.1.1",
@@ -25,7 +24,6 @@
     "caxa": "^3.0.1",
     "ncp": "^2.0.0",
     "pretty-ts-imports": "^1.1.0",
-    "shx": "^0.3.4",
     "typescript": "^4.8.4"
   }
 }
