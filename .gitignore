@@ -1,6 +1,8 @@
 ﻿# IDE
 .idea/
 
+.env
+
 dist/
 
 obj/
