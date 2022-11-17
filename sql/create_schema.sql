@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS bim_models.files (
     -- hash of original file
     hash char(${hash_length}) NOT NULL,
     -- path of wexbim file
-    wexbim varchar NOT NULL
+    wexbim varchar
 );
 
 CREATE TABLE IF NOT EXISTS bim_models.instances (
