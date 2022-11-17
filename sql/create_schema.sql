@@ -1,4 +1,4 @@
-﻿CREATE SCHEMA IF NOT EXISTS bim_models;
+CREATE SCHEMA IF NOT EXISTS bim_models;
 
 CREATE TABLE IF NOT EXISTS bim_models.models (
     -- name of the model
