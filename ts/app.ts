@@ -68,9 +68,11 @@ for (let f of argv._) {
   }
 }
 
+// start transaction for a persistent database
 db.tx(argv.n ? `insert bim: ${argv.n}` : "insert bim", async t => {
   logger.db.trace("Transaction start.");
 
+  // insert model grouping the files
   let {id: modelId} = await t.one(insertModelQuery, {
     name: argv.n,
     description: argv.d
@@ -90,6 +92,8 @@ db.tx(argv.n ? `insert bim: ${argv.n}` : "insert bim", async t => {
     let wexbim = base + ".wexbim";
     logger.converter.debug(`WEXBIM name: "${wexbim}"`);
     await convertIfc(file, wexbim, xml, logger);
+
+    // insert file metadata into database
     let {id: fileId} = await t.one(insertFileQuery, {
       model: modelId,
       name: base,
@@ -98,14 +102,19 @@ db.tx(argv.n ? `insert bim: ${argv.n}` : "insert bim", async t => {
     logger.db.info(`Inserted file "${f}".`);
     logger.db.debug(`File ID: ${fileId}`);
 
+    // use a read stream for less ram usage
     const xmlStream = createReadStream(xml).pipe(transformStream(100, {}));
     logger.xml.debug(`Created read stream for "${xml}".`);
     let iterator = xmlStream[Symbol.asyncIterator]();
 
+    // print the inserted instances only every second, this drastically improves
+    // execution time
     let counter = 0;
     let interval = setInterval(() => {
       logger.db.info(`Inserted ${counter} into database for "${f}".`);
     }, 1000);
+
+    // sequentially import every instance into the database
     await t.sequence(i => {
       return iterator.next().then(({value, done}) => {
         logger.xml.debug("Current value:");

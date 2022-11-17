@@ -1,13 +1,18 @@
+/**
+ * @file This file is used to bundle the application in a minimal .exe
+ */
+
 import caxa from "caxa";
 import pkg from "./package.json" assert {type: "json"};
 import {rmSync} from "fs";
 import {execSync} from "child_process";
-import {promisify} from "util";
 import ncp from "ncp";
-import {join} from "path";
 
+// cleanup
 let base;
 rmSync("dist", {force: true, recursive: true});
+
+// copy over necessary files
 await new Promise((resolve, reject) => ncp(
   ".",
   "dist",
@@ -23,10 +28,13 @@ await new Promise((resolve, reject) => ncp(
   },
   e => e ? reject(e) : resolve()
 ));
+
+// execute install on minimal files
 execSync("npm ci --omit=dev", {
   cwd: "dist/"
 });
 
+// bundle files to .exe
 let output = `dist/WebifyBim-${pkg.version}-win-x64.exe`;
 caxa({
   input: "dist/.",
