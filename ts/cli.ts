@@ -33,29 +33,33 @@ export async function args() {
       alias: "loglevel",
       describe: "Log Level for the Logger",
       requiresArg: true,
-      choices: ["all", "trace", "debug", "info", "warn", "fatal", "mark", "off"],
-      default: () => process.env.LOG_LEVEL ?? "info"
+      choices: ["trace", "debug", "info", "warn", "fatal", "off"],
+      default: () => process.env.LOG_LEVEL ?? "info",
+      defaultDescription: `$env:LOG_LEVEL | "info"`
     },
     u: {
       alias: "user",
       describe: "Postgres User",
       type: "string",
       requiresArg: true,
-      default: () => process.env.PG_USER ?? "postgres"
+      default: () => process.env.PG_USER ?? "postgres",
+      defaultDescription: `$env:PG_USER | "postgres"`
     },
     h: {
       alias: "host",
       describe: "Postgres Host",
       requiresArg: true,
       type: "string",
-      default: () => process.env.PG_HOST ?? "localhost"
+      default: () => process.env.PG_HOST ?? "localhost",
+      defaultDescription: `$env:PG_HOST | "localhost"`
     },
     P: {
       alias: "port",
       describe: "Postgres Port",
       requiresArg: true,
       type: "number",
-      default: () => process.env.PG_PORT ? parseInt(process.env.PG_PORT) : 5432
+      default: () => process.env.PG_PORT ? parseInt(process.env.PG_PORT) : 5432,
+      defaultDescription: `$env:PG_PORT | 5432`
     },
     p: {
       alias: "password",
@@ -63,26 +67,30 @@ export async function args() {
       demandOption: true,
       requiresArg: true,
       type: "string",
-      default: () => process.env.PG_PASS
+      default: () => process.env.PG_PASS,
+      defaultDescription: `$env:PG_PASS`
     },
     D: {
       alias: "database",
       describe: "Postgres Database",
       requiresArg: true,
       type: "string",
-      default: () => process.env.PG_DB ?? "wisdom"
+      default: () => process.env.PG_DB ?? "wisdom",
+      defaultDescription: `$env:PG_DB | "wisdom"`
     },
     hash_algo: {
       describe: "Hashing Algorithm used for File Hashing",
       type: "string",
       requiresArg: true,
-      default: () => process.env.HASH_ALGO ?? "md5"
+      default: () => process.env.HASH_ALGO ?? "md5",
+      defaultDescription: `$env:HASH_ALGO | "md5"`
     },
     hash_len: {
       describe: "Length of Column in Postgres Database for File Hashes",
       type: "number",
       requiresArg: true,
-      default: () => process.env.HASH_LEN ? parseInt(process.env.HASH_LEN) : 32
+      default: () => process.env.HASH_LEN ? parseInt(process.env.HASH_LEN) : 32,
+      defaultDescription: `$env:HASH_LEN | 32`
     }
   };
 
