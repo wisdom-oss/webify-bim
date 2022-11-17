@@ -1,9 +1,9 @@
 import {createHash} from "crypto";
 import {createReadStream, renameSync} from "fs";
-import {basename, resolve, dirname, join} from "path";
+import log from "log4js";
+import {basename, dirname, join, resolve} from "path";
 import pgPromise from "pg-promise";
 import {transformStream} from "txml/dist/transformStream.js";
-import log from "log4js";
 
 import {compact} from "./util.js";
 import {args} from "./cli.js";

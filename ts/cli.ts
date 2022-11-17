@@ -1,6 +1,6 @@
-import yargs from "yargs/yargs";
-import {readFile} from "fs/promises";
 import dotenv from "dotenv";
+import {readFile} from "fs/promises";
+import yargs from "yargs/yargs";
 
 export async function args() {
   const flags = {
