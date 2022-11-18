@@ -96,7 +96,7 @@ db.tx(argv.n ? `insert bim: ${argv.n}` : "insert bim", async t => {
     // insert file metadata into database
     let {id: fileId} = await t.one(insertFileQuery, {
       model: modelId,
-      name: base,
+      name: basename(base),
       hash: hashes[f]
     });
     logger.db.info(`Inserted file "${f}".`);
