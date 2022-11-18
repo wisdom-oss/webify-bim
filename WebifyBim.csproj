@@ -6,7 +6,7 @@
         <TargetFramework>net6.0</TargetFramework>
         <RootNamespace>WebifyBim</RootNamespace>
         <NoWarn>$(NoWarn);NU1603;NU1701;CS1998</NoWarn>
-        <DefaultItemExcludes>$(DefaultItemExcludes);node_modules\**\*</DefaultItemExcludes>
+        <DefaultItemExcludes>$(DefaultItemExcludes);node_modules\**\*;dist\**\*</DefaultItemExcludes>
     </PropertyGroup>
 
     <ItemGroup>
