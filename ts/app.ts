@@ -1,5 +1,5 @@
 import {createHash} from "crypto";
-import {createReadStream, renameSync} from "fs";
+import {createReadStream} from "fs";
 import log from "log4js";
 import {basename, dirname, join, resolve} from "path";
 import pgPromise from "pg-promise";
@@ -32,6 +32,26 @@ for (let l of Object.values(logger)) l.level = argv.l;
 logger.default.debug("Parsed arguments:");
 logger.default.debug(argv);
 
+// check if files actually exist
+logger.default.debug("Checking if Files actually exist.");
+for (let f of argv._) try {
+  logger.default.debug(`Checking "${f}".`);
+  for await (let _ of createReadStream(resolve(f))) break;
+}
+catch (e) {
+  switch (e.code) {
+    case "ENOENT":
+      logger.default.fatal(`No such file "${f}".`);
+      break;
+    case "EISDIR":
+      logger.default.fatal(`The given path "${f}" is a directory.`);
+      break;
+    default:
+      logger.default.fatal(e);
+  }
+  process.exit(1);
+}
+
 // connect to db and make schema if necessary
 const pgp = pgPromise();
 const db = pgp({
@@ -46,6 +66,7 @@ logger.db.debug("Created schema.");
 
 // create hashes from all files
 const hashes = {};
+logger.hasher.info("Checking if Files are already in database.");
 for (let f of argv._) {
   const file = resolve(f);
   let hasher = createHash(argv.hash_algo).setEncoding("hex");

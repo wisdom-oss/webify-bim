@@ -4,8 +4,6 @@ import yargs from "yargs/yargs";
 
 // TODO: add command description
 
-// TODO: validate if files exist
-
 export async function args() {
   const flags = {
     n: {
