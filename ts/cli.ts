@@ -2,8 +2,6 @@ import dotenv from "dotenv";
 import {readFile} from "fs/promises";
 import yargs from "yargs/yargs";
 
-// TODO: add command description
-
 export async function args() {
   const flags = {
     n: {
@@ -102,6 +100,8 @@ export async function args() {
   if (env.e) Object.assign(process.env, dotenv.parse(await readFile(env.e)));
 
   return await yargs(process.argv.slice(2))
+    .scriptName("WebifyBim")
+    .usage("Usage: WebifyBim [Options...] [Files...]")
     .locale("en")
     .command(`[Files...]`, "Related Files for a BIM")
     .string("_")
